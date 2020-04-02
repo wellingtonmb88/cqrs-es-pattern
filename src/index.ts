@@ -14,17 +14,16 @@ import {
   IProjector,
 } from './interfaces';
 
-export { aggregate as Aggregate }
-export { command as Command }
-export { projection as Projection }
-export { IEvent as IEvent }
-export { ICommand as ICommand }
-export { IReducer as IReducer }
-export { IAggregate as IAggregate }
-export { ICommandHandler as ICommandHandler }
-export { IEventStoreRepository as IEventStoreRepository }
-export { IEventBusAdapater as IEventBusAdapater }
-export { IReadModelRepository as IReadModelRepository }
-export { IProjection as IProjection }
-export { IProjector as IProjector }
- 
+export { aggregate as Aggregate };
+export { command as Command };
+export { projection as Projection };
+export { IEvent };
+export { ICommand };
+export { IReducer };
+export { IAggregate };
+export { ICommandHandler };
+export { IEventStoreRepository };
+export { IEventBusAdapater };
+export { IReadModelRepository };
+export { IProjection };
+export { IProjector };
