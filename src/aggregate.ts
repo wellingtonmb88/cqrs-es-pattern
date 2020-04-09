@@ -42,8 +42,8 @@ export default abstract class Aggregate implements IAggregate, ICommandHandler, 
     return {
       ...state,
       repository: undefined,
-      eventBusAdapter: undefined
-    }
+      eventBusAdapter: undefined,
+    };
   }
 
   public createEvent(command: ICommand, type: string, version: number, initialState?: IAggregate): IEvent {
@@ -51,8 +51,8 @@ export default abstract class Aggregate implements IAggregate, ICommandHandler, 
       type,
       aggregateId: this.id,
       payload: {},
-      timestamp: command.timestamp
-    }
+      timestamp: command.timestamp,
+    };
 
     return {
       ...event,
@@ -60,7 +60,7 @@ export default abstract class Aggregate implements IAggregate, ICommandHandler, 
         ...this.createPayload(this.reduce([event], initialState)),
         version,
       },
-    }
+    };
   }
 
   abstract reduce(events: IEvent[], initialState?: IAggregate): IAggregate;

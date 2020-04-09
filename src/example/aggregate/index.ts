@@ -11,7 +11,11 @@ export default class UserAggregate extends Aggregate {
     return instance;
   }
 
-  static async getInstance(id: string, repo: IEventStoreRepository, eventAdapter: IEventBusAdapater): Promise<UserAggregate> {
+  static async getInstance(
+    id: string,
+    repo: IEventStoreRepository,
+    eventAdapter: IEventBusAdapater,
+  ): Promise<UserAggregate> {
     const events = await repo.getEventsByAggregateId(id);
     let instance = new UserAggregate(repo, eventAdapter);
     let aggregate = instance.reduce(events);
@@ -72,7 +76,7 @@ export default class UserAggregate extends Aggregate {
     if (account.version && account.version != 0) {
       throw new Error(`User already created`);
     }
-    const event = this.createEvent(command, 'AccountCreated', 0, account)
+    const event = this.createEvent(command, 'AccountCreated', 0, account);
     this.repository.save(event, 0);
     this.publish(event);
   }
@@ -84,7 +88,7 @@ export default class UserAggregate extends Aggregate {
     }
 
     const version = account.version! + 1;
-    const event = this.createEvent(command, 'AccountClosed', version, account)
+    const event = this.createEvent(command, 'AccountClosed', version, account);
     this.repository.save(event, version);
     this.publish(event);
   }
