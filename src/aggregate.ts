@@ -38,6 +38,31 @@ export default abstract class Aggregate implements IAggregate, ICommandHandler, 
     return target;
   }
 
+  public createPayload(state: IAggregate): any {
+    return {
+      ...state,
+      repository: undefined,
+      eventBusAdapter: undefined
+    }
+  }
+
+  public createEvent(command: ICommand, type: string, version: number, initialState?: IAggregate): IEvent {
+    const event: IEvent = {
+      type,
+      aggregateId: this.id,
+      payload: {},
+      timestamp: command.timestamp
+    }
+
+    return {
+      ...event,
+      payload: {
+        ...this.createPayload(this.reduce([event], initialState)),
+        version,
+      },
+    }
+  }
+
   abstract reduce(events: IEvent[], initialState?: IAggregate): IAggregate;
   abstract handle(command: ICommand): void;
   abstract publish(event: IEvent): void;

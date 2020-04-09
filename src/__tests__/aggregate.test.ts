@@ -11,17 +11,17 @@ test('Aggregate', async () => {
 
   const createAccountCommand = new CreateAccountCommand({});
 
-  userAggregate.handle(createAccountCommand);
+  await userAggregate.handle(createAccountCommand);
 
-  expect(userAggregate.reduce(eventStore.getEvents()).status).toBe('created');
-  expect(userAggregate.reduce(eventStore.getEvents()).version).toBe(0);
+  expect(userAggregate.reduce(await eventStore.getEvents()).status).toBe('created');
+  expect(userAggregate.reduce(await eventStore.getEvents()).version).toBe(0);
 
   await new Promise((r) => setTimeout(r, 100));
 
-  const currentUserAggregate = UserAggregate.getInstance(userAggregate.id!, eventStore, eventAdapter);
+  const currentUserAggregate = await UserAggregate.getInstance(userAggregate.id!, eventStore, eventAdapter);
 
   const closeAccountCommand = new CloseAccountCommand({ status: 'closed' });
-  currentUserAggregate.handle(closeAccountCommand);
+  await currentUserAggregate.handle(closeAccountCommand);
 
   expect(userAggregate.reduce(eventStore.getEvents()).status).toBe('closed');
   expect(userAggregate.reduce(eventStore.getEvents()).version).toBe(1);

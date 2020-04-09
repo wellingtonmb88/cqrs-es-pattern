@@ -30,7 +30,7 @@ import { IProjector, IEvent } from '../interfaces';
 
   eventAdapter.subscribe(`account_${userAggregate.id}`, userProjector);
 
-  userAggregate.handle(createAccountCommand);
+  await userAggregate.handle(createAccountCommand);
   //#################  #########################
 
   //################# QUERY #########################
@@ -38,11 +38,11 @@ import { IProjector, IEvent } from '../interfaces';
   //#################  #########################
 
   //################# COMMAND #########################
-  const currentUserAggregate = UserAggregate.getInstance(userAggregate.id!, eventStore, eventAdapter);
+  const currentUserAggregate = await UserAggregate.getInstance(userAggregate.id!, eventStore, eventAdapter);
 
   const closeAccountCommand = new CloseAccountCommand({ status: 'closed' });
   await new Promise((r) => setTimeout(r, 500));
-  currentUserAggregate.handle(closeAccountCommand);
+  await currentUserAggregate.handle(closeAccountCommand);
 
   //#################  #########################
 
