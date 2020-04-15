@@ -7,6 +7,6 @@ export default abstract class Projection implements IProjection {
   }
 
   abstract process(event: IEvent): void;
-  abstract getAll(): IAggregate[];
-  abstract getById(id: string): IAggregate | undefined;
+  abstract getAll(): IAggregate[] | Promise<IAggregate[]>;
+  abstract getById(id: string): IAggregate | Promise<IAggregate> | undefined;
 }

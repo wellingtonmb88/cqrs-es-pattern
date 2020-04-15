@@ -22,9 +22,9 @@ test('EventStore', async () => {
 
   eventStore.save(event2, 1);
 
-  expect(eventStore.getEvents().length).toBe(2);
+  expect((await eventStore.getEvents()).length).toBe(2);
   expect(eventStore.getEventByVersion(0)).toBe(event1);
   expect(eventStore.getEventByVersion(1)).toBe(event2);
-  expect(eventStore.getEventsFromVersion(0).length).toBe(2);
-  expect(eventStore.getEventsByAggregateId('aggregateId-1').length).toBe(2);
+  expect((await eventStore.getEventsFromVersion(0)).length).toBe(2);
+  expect((await eventStore.getEventsByAggregateId('aggregateId-1')).length).toBe(2);
 });

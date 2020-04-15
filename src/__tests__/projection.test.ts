@@ -5,8 +5,8 @@ import { IEvent } from '../interfaces';
 test('Projection', async () => {
   const readModel = new ReadModel();
   const userProjection = new UserProjection(readModel);
-
-  expect(userProjection.getAll().length).toBe(0);
+  const allUsers = await userProjection.getAll()
+  expect(allUsers.length).toBe(0);
 
   const event1: IEvent = {
     type: 'AccountCreated',

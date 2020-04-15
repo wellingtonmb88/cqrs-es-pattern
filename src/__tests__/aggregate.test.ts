@@ -23,6 +23,6 @@ test('Aggregate', async () => {
   const closeAccountCommand = new CloseAccountCommand({ status: 'closed' });
   await currentUserAggregate.handle(closeAccountCommand);
 
-  expect(userAggregate.reduce(eventStore.getEvents()).status).toBe('closed');
-  expect(userAggregate.reduce(eventStore.getEvents()).version).toBe(1);
+  expect(userAggregate.reduce(await eventStore.getEvents()).status).toBe('closed');
+  expect(userAggregate.reduce(await eventStore.getEvents()).version).toBe(1);
 });

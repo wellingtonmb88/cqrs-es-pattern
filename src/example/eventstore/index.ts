@@ -11,19 +11,19 @@ export default class EventStore implements IEventStoreRepository {
     this.db.push(event);
   }
 
-  getEvents(): IEvent[] {
+  getEvents(): IEvent[] | Promise<IEvent[]> {
     return this.db;
   }
 
-  getEventsByAggregateId(id: string): IEvent[] {
+  getEventsByAggregateId(id: string): IEvent[] | Promise<IEvent[]> {
     return this.db.filter((e) => e.aggregateId === id);
   }
 
-  getEventByVersion(version: number): IEvent | unknown {
+  getEventByVersion(version: number): IEvent | Promise<IEvent> | undefined {
     return this.db.find((e) => e.version === version);
   }
 
-  getEventsFromVersion(version: number): IEvent[] {
+  getEventsFromVersion(version: number): IEvent[] | Promise<IEvent[]> {
     const startIndex = this.db.findIndex((e) => e.version === version);
     return this.db.slice(startIndex, this.db.length);
   }
