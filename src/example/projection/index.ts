@@ -2,7 +2,6 @@ import Projection from '../../projection';
 import { IEvent, IReadModelRepository, IAggregate } from '../../interfaces';
 
 export default class UserProjection extends Projection {
- 
   constructor(repository: IReadModelRepository) {
     super(repository);
   }
@@ -19,9 +18,9 @@ export default class UserProjection extends Projection {
     }
   }
 
-   getAll(): IAggregate[] | Promise<IAggregate[]> {
+  getAll(): IAggregate[] | Promise<IAggregate[]> {
     return this.repository.getAll();
-  } 
+  }
 
   getById(id: string): IAggregate | Promise<IAggregate> | undefined {
     return this.repository.getById(id);
