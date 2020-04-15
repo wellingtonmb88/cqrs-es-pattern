@@ -22,7 +22,7 @@ export default class UserProjection extends Projection {
     return this.repository.getAll();
   }
 
-  getById(id: string): IAggregate | Promise<IAggregate> | undefined {
+  getById(id: string): IAggregate | Promise<IAggregate> | null {
     return this.repository.getById(id);
   }
 

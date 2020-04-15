@@ -19,8 +19,12 @@ export default class EventStore implements IEventStoreRepository {
     return this.db.filter((e) => e.aggregateId === id);
   }
 
-  getEventByVersion(version: number): IEvent | Promise<IEvent> | undefined {
-    return this.db.find((e) => e.version === version);
+  getEventByVersion(version: number): IEvent | Promise<IEvent> {
+    const event = this.db.find((e) => e.version === version);
+    if (!event) {
+      throw new Error('Event not found!');
+    }
+    return event;
   }
 
   getEventsFromVersion(version: number): IEvent[] | Promise<IEvent[]> {

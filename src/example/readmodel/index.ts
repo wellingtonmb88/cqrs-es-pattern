@@ -19,15 +19,15 @@ export default class ReadModel implements IReadModelRepository {
     });
   }
 
-  getAll(): IAggregate[] | Promise<IAggregate[]> {
+  getAll(): IAggregate[] {
     return this.db;
   }
 
-  getById(id: string): IAggregate | Promise<IAggregate> | undefined {
-    return this.db.find((a) => a.id === id);
+  getById(id: string): IAggregate | null {
+    return this.db.find((a) => a.id === id) || null;
   }
 
-  getByVersion(version: number): IAggregate | Promise<IAggregate> | undefined {
+  getByVersion(version: number): IAggregate {
     throw new Error('Method not implemented.');
   }
 }

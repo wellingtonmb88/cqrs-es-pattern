@@ -4,6 +4,6 @@ export default interface IEventStoreRepository {
   save(event: IEvent, expectedVersion: number): void;
   getEvents(): IEvent[] | Promise<IEvent[]>;
   getEventsByAggregateId(id: string): IEvent[] | Promise<IEvent[]>;
-  getEventByVersion(version: number): IEvent | Promise<IEvent> | undefined;
+  getEventByVersion(version: number): IEvent | Promise<IEvent> | null;
   getEventsFromVersion(version: number): IEvent[] | Promise<IEvent[]>;
 }
