@@ -4,5 +4,5 @@ import IEvent from './event';
 export default interface IProjection {
   process(event: IEvent): void;
   getAll(): IAggregate[] | Promise<IAggregate[]>;
-  getById(id: string): IAggregate | Promise<IAggregate> | null;
+  getById(id: string): IAggregate | null | Promise<IAggregate | null>;
 }
